@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>User Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  </head>
+  <body>
+    <ul class="nav nav-pills">
+      <li role="presentation"><a href="{{ url_for('user.index') }}">index</a></li>
+      {% if current_user.is_authenticated %}
+      <li role="presentation"><a href="{{ url_for('user.logout') }}">Logout</a></li>
+      <li role="presentation"><a href="#">{{ user.username }}</a></li>
+      {% else %}
+      <li role="presentation"><a href="{{ url_for('user.login') }}">Login</a></li>
+      <li role="presentation"><a href="{{ url_for('user.register') }}">Register</a></li>
+      {% endif %}
+    </ul>
+    {% block content %}{% endblock %}
+  </body>
+</html>

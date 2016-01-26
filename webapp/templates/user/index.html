@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="panel panel-primary">
+  <div class="panel-heading">{{ user.username}}'s all friends <span class="badge" id="friendcount"> {{ user_friends|length }}</span></div>
+  <div class="panel-body">
+    <div class="list-group" id="friends">
+    {% for user in user_friends %}
+    {% if user in logined_friends %}
+      <span class="label label-success">
+    {% else %}
+      <span class="label label-default">
+    {% endif %}
+    {{ user }}</span>
+    {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-danger">
+  <div class="panel-heading">All user - Add your friends <span class="badge"> {{ users|length }}</span></div>
+  <div class="panel-body">
+    <div class="list-group">
+      {% for user in users %}
+      <button type="button" class="btn btn-info-outline" value="{{ user.username }}">{{ user.username }}</button>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+$("button").click(function(event){
+  event.preventDefault();
+  var friendname = $(this).val();
+  var friendcount = {{ user_friends|length }};
+  
+  $.ajax({
+    type: "POST",
+    url: "{{ url_for('user.add_friend') }}",
+    data: {friendname:friendname},
+    datatype:'json',
+    success: function(msg) {
+      var resp = JSON.parse(msg);
+      if(resp.result == "ok") {
+        $("#friends").append(' <span class="label label-default"> ' + friendname + '</span>');
+          friendcount = friendcount + 1;
+        $("#friendcount").html(friendcount);
+      } else {
+        console.log(resp.message);
+      }
+    }
+  });
+}); 
+</script>
+
+{% endblock %}
