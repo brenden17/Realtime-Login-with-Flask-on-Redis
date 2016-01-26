@@ -30,3 +30,4 @@ python manage.py server # for running server
 python manage.py shell # for shell
 ~~~
 
+![alt text](https://github.com/brenden17/Realtime-Login-with-Flask-on-Redis/blob/master/img/login.png "image")
