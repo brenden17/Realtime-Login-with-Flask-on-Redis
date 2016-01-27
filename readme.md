@@ -1,4 +1,4 @@
-# Real Login status with redis and mongodb on Flask 
+# Realtime Login status with redis and mongodb on Flask 
 
 This is Flask extension which implements user's friend login status with Redis and mongodb.
 
