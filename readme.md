@@ -3,7 +3,7 @@
 This is Flask extension which implements user's friend login status with Redis and mongodb.
 
 
-## Reqirements
+## Requirements
 
 * Redis server
 * mongodb
